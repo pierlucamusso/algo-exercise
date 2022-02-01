@@ -15,8 +15,8 @@ namespace algo_exercise
             Console.WriteLine("Result for 4000000 limit " + res);
 
             Console.WriteLine("Exercise 3");
-            res = Exercise2(13195);
-            Console.WriteLine("Result for 4000000 limit " + res);
+            Console.WriteLine("Result for 13195 " + Exercise3(13195));
+            Console.WriteLine("Result for 600851475143 " + Exercise3(600851475143));
         }
 
         /**
@@ -58,33 +58,45 @@ namespace algo_exercise
             return evenSum;
         }
 
-        public static int Exercise3(int number)
+        public static long Exercise3(long number)
         {
-            int currentPrimeFactor = 2;
+            long currentPrimeFactor = 2;
+            long start_point = 1;
+            long end_point = number;
 
-            while (!IsPrime(currentPrimeFactor))
+
+            while (start_point != number)
             {
-                if (number % currentPrimeFactor == 0)
-                    number /= currentPrimeFactor;
+                if (end_point % currentPrimeFactor == 0)
+                {
+                    end_point /= currentPrimeFactor;
+                    start_point *= currentPrimeFactor;
+                }
+                else
+                {
+                    while (end_point % currentPrimeFactor != 0 && !IsPrime(currentPrimeFactor))
+                        currentPrimeFactor++;
+                }
             }
 
             return currentPrimeFactor;
         }
 
-        public static bool IsPrime(int number)
+        public static bool IsPrime(long number)
         {
             int dividers = 0;
             int divisor = 1;
 
             while (dividers < 3 || divisor >= number / 2)
             {
-                if (number % divisor == 0)
+                if (number % divisor == 0 && (divisor == 1 || divisor == number))
                     dividers++;
-
+                else
+                    return false;
                 divisor++;
             }
 
-            return dividers <= 2;
+            return dividers == 2;
         }
 
     }
