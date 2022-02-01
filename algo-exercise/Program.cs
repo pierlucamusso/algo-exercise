@@ -17,6 +17,10 @@ namespace algo_exercise
             Console.WriteLine("Exercise 3");
             Console.WriteLine("Result for 13195 " + Exercise3(13195));
             Console.WriteLine("Result for 600851475143 " + Exercise3(600851475143));
+
+            Console.WriteLine("Exercise 4");
+            Console.WriteLine("Result for 10 " + Exercise4(10));
+            Console.WriteLine("Result for 100 " + Exercise4(100));
         }
 
         /**
@@ -97,6 +101,31 @@ namespace algo_exercise
             }
 
             return dividers == 2;
+        }
+
+        public static bool IsPrime_Beauty(long number)
+        {
+            for (long x = 2; x <= number / 2; x++)
+            {
+                if (number % x == 0)
+                    return false;
+            }
+
+            return true;
+        }
+
+        public static long Exercise4(int limit)
+        {
+            long sum_of_squares = 0;
+            long square_of_sum = 0;
+
+            for (long x = 0; x <= limit; x++)
+            {
+                sum_of_squares += x * x;
+                square_of_sum += x;
+            }
+
+            return (square_of_sum * square_of_sum) - sum_of_squares;
         }
 
     }
